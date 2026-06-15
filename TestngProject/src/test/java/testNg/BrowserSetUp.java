@@ -1,4 +1,6 @@
 package testNg;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -26,10 +28,13 @@ public class BrowserSetUp {
        // System.out.println("Opening Facebook...");
         // Code to open Facebook in a web browser would go here
         if (browser.equalsIgnoreCase("chrome")) {
+            WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();
         } else if (browser.equalsIgnoreCase("firefox")) {
+            WebDriverManager.firefoxdriver().setup();
             driver = new FirefoxDriver();
         } else if (browser.equalsIgnoreCase("edge")) {
+            WebDriverManager.edgedriver().setup();
             driver = new EdgeDriver();
         } else {
             System.out.println("Invalid browser name: " + browser);
@@ -55,11 +60,18 @@ public class BrowserSetUp {
 
         LocalDateTime now = LocalDateTime.now();
         String timestamp = now.toString().replace(":", "-");
-        TakesScreenshot ts=(TakesScreenshot) driver;
-        File src=ts.getScreenshotAs(OutputType .FILE);
-        File dest=new File("C:\\Users\\Yashwanth\\IdeaProjects\\TestngProject\\src\\Screenshot\\test_"+timestamp+".png");
-        System.out.println("Screenshot taken successfully");
-        FileHandler.copy(src,dest);
+        TakesScreenshot ts = (TakesScreenshot) driver;
+        File src = ts.getScreenshotAs(OutputType.FILE);
+        // Store screenshots inside project folder: <project-root>/src/Screenshot/
+        String destPath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "Screenshot" + File.separator + "test_" + timestamp + ".png";
+        File dest = new File(destPath);
+        // Ensure parent directory exists
+        File parent = dest.getParentFile();
+        if (parent != null && !parent.exists()) {
+            parent.mkdirs();
+        }
+        System.out.println("Screenshot taken successfully -> " + dest.getAbsolutePath());
+        FileHandler.copy(src, dest);
 
     }
 
