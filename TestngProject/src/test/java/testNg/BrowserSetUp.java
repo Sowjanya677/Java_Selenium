@@ -1,6 +1,6 @@
 package testNg;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
+//import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -28,13 +28,13 @@ public class BrowserSetUp {
        // System.out.println("Opening Facebook...");
         // Code to open Facebook in a web browser would go here
         if (browser.equalsIgnoreCase("chrome")) {
-            WebDriverManager.chromedriver().setup();
+            //WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();
         } else if (browser.equalsIgnoreCase("firefox")) {
-            WebDriverManager.firefoxdriver().setup();
+           // WebDriverManager.firefoxdriver().setup();
             driver = new FirefoxDriver();
         } else if (browser.equalsIgnoreCase("edge")) {
-            WebDriverManager.edgedriver().setup();
+           // WebDriverManager.edgedriver().setup();
             driver = new EdgeDriver();
         } else {
             System.out.println("Invalid browser name: " + browser);
